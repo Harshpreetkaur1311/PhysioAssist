@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.env
+
+# Node
+node_modules/
+dist/
+.eslintcache
+
+# MediaPipe / Task files
+# pose_landmarker_lite.task (usually too large for git, but I'll keep it if user wants it)
+# I'll exclude it just in case, but usually model files are ignored
+# *.task
+
+# OS / IDE
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Project specific
+session_context.json
+voice.mp3
+scratch/
+walkthrough.md
+implementation_plan.md
+task.md
