@@ -126,7 +126,7 @@ class PhysioEngine:
         threading.Thread(target=_post, daemon=True).start()
 
     def wait_for_session(self):
-        print(f"📡 AI Engine standby... Waiting for session in {ROOT_DIR}")
+        print(f"[STANDBY] AI Engine standby... Waiting for session in {ROOT_DIR}")
         while True:
             if os.path.exists(CTX_FILE):
                 try:
@@ -138,7 +138,7 @@ class PhysioEngine:
                     elif "lunge" in etype: self.tracker = LungeTracker()
                     else: self.tracker = SquatTracker()
                     
-                    print(f"🚀 Session Starting: {etype.upper()} for {ctx.get('user_name')}")
+                    print(f"[START] Session Starting: {etype.upper()} for {ctx.get('user_name')}")
                     speak(f"Starting {etype} session.")
                     os.remove(CTX_FILE)
                     self.start_webcam()
@@ -148,7 +148,6 @@ class PhysioEngine:
 
     def start_webcam(self):
         cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-        cv2.namedWindow("PhysioAssist AI", cv2.WINDOW_NORMAL)
         last_timestamp_ms = 0
         
         while cap.isOpened():
@@ -171,19 +170,12 @@ class PhysioEngine:
                     self.log_rep(stats)
                     speak(f"{stats['reps']}")
                 
-                # Simple Overlay
-                stats = self.tracker.get_stats()
-                cv2.rectangle(display_frame, (0,0), (250, 120), (0,0,0), -1)
-                cv2.putText(display_frame, f"REPS: {stats['reps']}", (10, 35), 1, 2, (0, 255, 0), 2)
-                cv2.putText(display_frame, stats['feedback'], (10, 80), 1, 1.5, (0, 255, 255), 2)
-
-            cv2.imshow("PhysioAssist AI", display_frame)
+            # No longer displaying window - UI is in the browser
             if cv2.waitKey(1) & 0xFF == ord('q'): break
 
         cap.release()
-        cv2.destroyAllWindows()
         self.active_session = None
-        print("📡 Session ended. Back to standby.")
+        print("[END] Session ended. Back to standby.")
 
 if __name__ == "__main__":
     engine = PhysioEngine()
