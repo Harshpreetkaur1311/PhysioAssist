@@ -19,11 +19,15 @@ def create_app() -> Flask:
     app.config["SECRET_KEY"] = SECRET_KEY
 
     # Allow requests from the Vite dev server
-    CORS(app, resources={r"/api/*": {"origins": [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "https://physio-assist-kappa.vercel.app"
-    ]}})
+    CORS(
+    app,
+    origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://physio-assist-kappa.vercel.app"
+    ],
+    supports_credentials=True
+)
 
     # ── Register blueprints ────────────────────────────────────────────────────
     app.register_blueprint(auth_bp)
