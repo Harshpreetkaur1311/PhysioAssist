@@ -20,8 +20,9 @@ def create_app() -> Flask:
 
     # Allow requests from the Vite dev server
     CORS(app, resources={r"/api/*": {"origins": [
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://physio-assist-kappa.vercel.app"
     ]}})
 
     # ── Register blueprints ────────────────────────────────────────────────────
