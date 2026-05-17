@@ -1,0 +1,84 @@
+.container {
+  padding-top: 120px;
+  padding-bottom: 80px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.header h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.stepCard {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.stepNumber {
+  font-family: var(--font-serif);
+  font-size: 8rem;
+  color: var(--accent-light);
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  opacity: 0.4;
+  z-index: 0;
+}
+
+.stepContent {
+  position: relative;
+  z-index: 1;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  background: var(--bg-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: var(--accent-darker);
+}
+
+.stepCard h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.stepCard p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.cta {
+  text-align: center;
+  margin-top: 80px;
+}

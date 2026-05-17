@@ -1,0 +1,13 @@
+@echo off
+echo Starting PhysioAssist Services...
+
+echo Starting Flask Backend on port 5000...
+start "Backend API" cmd /k "cd backend && python app.py"
+
+echo Starting Python AI Engine (Pose Detection)...
+start "AI Engine" cmd /k "python pose_detection.py"
+
+echo Starting Vite React Frontend on port 5173...
+start "Frontend" cmd /k "cd frontend && npm run dev"
+
+echo All services started in separate windows! You can now use the application.
