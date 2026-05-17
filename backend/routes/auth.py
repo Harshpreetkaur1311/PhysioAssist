@@ -60,8 +60,10 @@ def require_auth(f):
 
 # ─── Routes ───────────────────────────────────────────────────────────────────
 
-@auth_bp.route("/google", methods=["POST"])
+@auth_bp.route("/google", methods=["POST", "OPTIONS"])
 def google_login():
+    if request.method == "OPTIONS":
+        return "", 200
     """
     POST /api/auth/google
     Body: { "credential": "<Google ID token>" }
