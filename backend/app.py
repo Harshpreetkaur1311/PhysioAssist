@@ -28,6 +28,21 @@ def create_app() -> Flask:
     ],
     supports_credentials=True
 )
+    @app.after_request
+    def after_request(response):
+        response.headers.add(
+            "Access-Control-Allow-Origin",
+            "https://physio-assist-kappa.vercel.app"
+        )
+        response.headers.add(
+            "Access-Control-Allow-Headers",
+            "Content-Type,Authorization"
+        )
+        response.headers.add(
+            "Access-Control-Allow-Methods",
+            "GET,POST,PUT,DELETE,OPTIONS"
+        )
+    return response
 
     # ── Register blueprints ────────────────────────────────────────────────────
     app.register_blueprint(auth_bp)
