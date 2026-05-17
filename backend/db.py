@@ -11,14 +11,23 @@ def get_db():
     """Return the database instance, creating it if necessary."""
     global _client, _db
     if _db is None:
-        if os.getenv("RENDER") and "localhost" in MONGO_URI:
+        try:
+            # If obvious localhost on Render, skip to fallback immediately
+            if os.getenv("RENDER") and "localhost" in MONGO_URI:
+                raise Exception("Localhost MongoDB URI detected on Render")
+                
+            # Attempt connection with a short timeout (3 seconds) so it doesn't hang forever
+            _client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=3000)
+            
+            # Force a connection attempt to verify it works (Atlas IP whitelist, bad password, etc)
+            _client.admin.command('ping')
+            _db = _client.get_default_database()
+            
+        except Exception as e:
+            print(f"MongoDB Connection Failed: {e}. Falling back to mongomock (in-memory).")
             import mongomock
-            print("Using mongomock (in-memory db) as fallback on Render")
             _client = mongomock.MongoClient()
             _db = _client.physioassist_db
-        else:
-            _client = MongoClient(MONGO_URI)
-            _db = _client.get_default_database()
             
         _ensure_indexes(_db)
     return _db
