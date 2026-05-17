@@ -6,3 +6,4 @@ google-auth==2.29.0
 python-dotenv==1.0.1
 gunicorn==26.0.0
 mongomock==4.3.0
+requests==2.31.0
