@@ -3,7 +3,7 @@ import os
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-from flask import Flask, jsonify, request, make_response
+from flask import Flask, jsonify
 from flask_cors import CORS
 
 from config import SECRET_KEY
@@ -17,36 +17,8 @@ def create_app() -> Flask:
     app = Flask(__name__)
     app.config["SECRET_KEY"] = SECRET_KEY
 
-    allowed_origins = [
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "https://physio-assist-kappa.vercel.app",
-    ]
+    CORS(app, resources={r"/*": {"origins": "*"}})
 
-    CORS(
-        app,
-        resources={r"/api/*": {"origins": allowed_origins}},
-        supports_credentials=True,
-    )
-
-    @app.before_request
-    def handle_options():
-        if request.method == "OPTIONS":
-            response = make_response()
-            response.headers["Access-Control-Allow-Origin"] = "https://physio-assist-kappa.vercel.app"
-            response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
-            response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS"
-            return response
-
-    @app.after_request
-    def after_request(response):
-        origin = request.headers.get("Origin")
-        if origin in allowed_origins:
-            response.headers["Access-Control-Allow-Origin"] = origin
-        response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
-        response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS"
-        response.headers["Access-Control-Allow-Credentials"] = "true"
-        return response
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(sessions_bp)
