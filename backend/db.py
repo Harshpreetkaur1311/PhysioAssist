@@ -1,6 +1,5 @@
 import os
 from pymongo import MongoClient
-import mongomock
 from config import MONGO_URI
 
 # Singleton MongoDB client
@@ -13,6 +12,7 @@ def get_db():
     global _client, _db
     if _db is None:
         if os.getenv("RENDER") and "localhost" in MONGO_URI:
+            import mongomock
             print("Using mongomock (in-memory db) as fallback on Render")
             _client = mongomock.MongoClient()
             _db = _client.physioassist_db
