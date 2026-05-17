@@ -42,7 +42,7 @@ def create_app() -> Flask:
             "Access-Control-Allow-Methods",
             "GET,POST,PUT,DELETE,OPTIONS"
         )
-    return response
+        return response
 
     # ── Register blueprints ────────────────────────────────────────────────────
     app.register_blueprint(auth_bp)
