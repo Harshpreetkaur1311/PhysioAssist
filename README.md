@@ -65,3 +65,65 @@ It also provides secure authentication, progress tracking, exercise history, and
 - ☁️ MongoDB Atlas Integration
 - 📱 Responsive User Interface
 - 📈 Exercise Progress Tracking
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- React 19
+- Vite
+- Tailwind CSS
+- JavaScript
+
+### Backend
+
+- Python
+- Flask
+
+### AI & Computer Vision
+
+- MediaPipe Pose
+- OpenCV
+- NumPy
+
+### Database
+
+- MongoDB Atlas
+
+### Authentication
+
+- Firebase Authentication
+
+### Deployment
+
+- Vercel (Frontend)
+- Render (Backend)
+
+### Version Control
+
+- Git
+- GitHub
+
+## 📁 Project Structure
+
+```text
+PhysioAssist/
+│
+├── 📁 assets/                     # Logo, screenshots, diagrams & demo files
+├── 📁 backend/                    # Flask backend source code
+├── 📁 frontend/                   # React frontend application
+│
+├── 📄 app.py                      # Main Flask application entry point
+├── 📄 pose_detection.py           # Pose detection and joint angle calculations
+├── 📄 pose_landmarker_lite.task   # MediaPipe Pose model
+├── 📄 requirements.txt            # Python dependencies
+├── 📄 start.bat                   # Windows startup script
+├── 📄 start.ps1                   # PowerShell startup script
+├── 📄 pyrightconfig.json          # Pyright configuration
+├── 📄 .gitignore                  # Git ignore rules
+├── 📄 README.md                   # Project documentation
+│
+├── 📄 test_mp.py                  # MediaPipe testing script
+├── 📄 test_voice.py               # Voice module testing
+└── 📄 webcam_test.py              # Webcam testing utility
+```
